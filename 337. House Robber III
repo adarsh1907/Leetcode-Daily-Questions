@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+     void maxSum(TreeNode* root, int &childSum, int &grandChildSum) {
+        if (!root) return;
+        if (root->right == root->left) {
+            // no grand child so gChildSum is 0 and childSum is current value
+            childSum = root->val;
+            grandChildSum = 0;
+            return;
+        }
+        // Collect left and right childSum and thier grandChild sum
+        int lChildSum = 0;
+        int rChildSum = 0;
+        int lgrandChildSum = 0;
+        int rgrandChildSum = 0;
+        if (root->left)  maxSum(root->left, lChildSum, lgrandChildSum);
+        if (root->right) maxSum(root->right,rChildSum, rgrandChildSum);
+        
+        // maximumm sum can be obtained from below :
+        // 1. current node + grandchild's sum from next level
+        // 2. childSum of the current level
+        childSum = max((root->val + lgrandChildSum + rgrandChildSum),lChildSum+rChildSum);
+
+        // make the current child sum as grandChildSum for next level
+        grandChildSum = lChildSum + rChildSum;
+        return;
+    }
+    int rob(TreeNode* root) {
+       int childSum = 0;
+       int grandChildSum = 0;
+       maxSum(root,childSum,grandChildSum);
+       return (childSum);
+    }
+};
