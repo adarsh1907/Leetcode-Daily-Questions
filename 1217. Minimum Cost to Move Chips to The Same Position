@@ -1,0 +1,8 @@
+class Solution {
+public:
+    int minCostToMoveChips(vector<int>& position) {
+        int cnt[2] = {};
+        for (auto p : position) ++cnt[p % 2];  // Count chips in even and odd positions
+        return min(cnt[0], cnt[1]);   // Return smaller count
+    }
+};
