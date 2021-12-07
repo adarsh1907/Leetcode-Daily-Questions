@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        ListNode *temp=head;
+        int c=0,k=0;
+        // For counting the number of nodes
+        while(temp->next!=NULL){
+            c++;
+            temp=temp->next;
+        }
+        // Converting the binary numbers to integer
+        while(head->next!=NULL){
+            k=k+head->val*pow(2,c--);
+            head=head->next;
+        }
+        k=k+head->val*pow(2,c);
+        return k;
+    }
+};
