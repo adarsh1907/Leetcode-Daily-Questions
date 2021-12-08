@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int ans=0;
+    int dfs(TreeNode *root){
+        if(!root) return 0;
+        root->val=root->val + dfs(root->left) + dfs(root->right); // Making all the nodes is equal to the sum of root, root->left and root->right
+        if(root->left && root->right) ans+=abs(root->left->val-root->right->val);
+        else if(root->left) ans+=abs(root->left->val);
+        else if(root->right) ans+=abs(root->right->val);
+        return root->val;
+    }
+    int findTilt(TreeNode* root) {
+        ans=0;
+        dfs(root);
+        return ans;
+    }
+};
