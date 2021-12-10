@@ -1,0 +1,16 @@
+int numTilings(int n) {
+        int dp[n+1],mod = 1e9 + 7;
+        if(n<3) return n;
+        dp[0]=1,dp[1]=1,dp[2]=2;
+        for(int i=3;i<=n;i++) dp[i]=((dp[i-1]*2)%mod+dp[i-3]%mod)%mod;
+        return dp[n];
+}
+    
+/*
+5 = 2 * 2 + 1
+11 = 5 * 2 + 1
+24 = 11 * 2 + 2
+53 = 24 * 2 + 5
+117 = 53 * 2 + 11
+A[N] = A[N-1] * 2 + A[N-3]
+*/
