@@ -1,0 +1,13 @@
+int maxPower(string s) {
+        int ans=1,k=1;
+        for(int i=1;i<s.size();i++){
+            if(s[i]==s[i-1]){
+                k++;
+                ans=max(ans,k);
+            }
+            else{
+                k=1;
+            }
+        }
+        return ans;
+    }
