@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<string>v;
+    void sum(TreeNode *root,string s){
+        if(!root) return;
+        if(!root->left && !root->right){
+            int k=root->val;
+            if(k) s+='1';
+            else s+='0';
+            v.push_back(s);
+            return;
+        }
+        int k=root->val;
+        if(k) s+='1';
+        else s+='0';
+        sum(root->left,s);
+        sum(root->right,s);
+    }
+    
+    int sumRootToLeaf(TreeNode* root) {
+        if(!root->left && !root->right) return root->val;
+        v.clear();
+        string s="";
+        sum(root,s);
+        int ans=0;
+        for(int i=0;i<v.size();i++){
+            string m=v[i];
+            int sum=0,k=0;
+            for(int j=m.size()-1;j>=0;j--){
+                if(m[j]=='1'){
+                    sum = sum + pow(2,k);
+                }
+                k++;
+            }
+           // cout<<v[i]<<" ";
+            ans+=sum;
+        }
+        return ans;
+    }
+};
