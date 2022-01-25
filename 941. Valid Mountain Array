@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool validMountainArray(vector<int>& A) {
+        int i=0,k=0,n;
+        n=A.size();
+        if(n<3){
+            return 0;
+        }
+        bool f1=false,f2=false;
+        while(k+1<n && A[k]<A[k+1]){
+            i++;
+            k++;
+            f1=true;
+        }
+        while(k+1<n && A[k]>A[k+1]){
+            i++;
+            k++;
+            f2=true;
+        }
+        if((i+1)==n && f1 && f2)
+            return 1;
+        else
+            return 0;
+    }
+};
