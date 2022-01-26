@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
+        vector<int>v1,v2;
+        if(root1) dfs(root1,v1);
+        if(root2) dfs(root2,v2);
+        v1.insert(v1.end(),v2.begin(),v2.end());
+        sort(v1.begin(),v1.end());
+        return v1;
+        
+    }
+    void dfs(TreeNode* root, vector<int>& v){
+        if (root->left) dfs(root->left, v);
+        v.push_back(root->val);
+        if (root->right) dfs(root->right, v);
+    }
+};
