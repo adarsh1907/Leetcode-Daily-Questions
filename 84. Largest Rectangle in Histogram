@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& arr) {
+        stack<int>s;
+        int n=arr.size();
+        long long ans=INT_MIN,i=0;
+        while(i<n){
+            if(s.empty() || arr[s.top()]<=arr[i]) s.push(i++);
+            else{
+                long long t=s.top();
+                s.pop();
+                long long k=arr[t]*(s.empty()?i:i-s.top()-1);
+                ans=max(ans,k);
+            }
+        }
+        while(!s.empty()){
+            long long t=s.top();
+            s.pop();
+            long long k=arr[t]*(s.empty()?i:i-s.top()-1);
+            ans=max(ans,k);
+        }
+        return ans;
+    }
+};
